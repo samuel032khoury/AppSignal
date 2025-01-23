@@ -1,11 +1,9 @@
 
 # AppSignal - Real-Time SaaS Insights ✨
 
-AppSignal is a SaaS platform that allows developers to monitor real-time events in their applications and receive notifications directly in their Discord accounts. This project includes an API for tracking events, a beautiful dashboard for managing and viewing data, and a complete quota tracking and subscription system.
-
----
-
 ## Features 🔮
+
+AppSignal is a SaaS platform that allows developers to monitor real-time events in their applications and receive notifications directly in their Discord accounts. This project includes an API for tracking events, a beautiful dashboard for managing and viewing data, and a complete quota tracking and subscription system.
 
 ### Core Functionality
 - **Real-Time Event Notifications** 
@@ -41,8 +39,6 @@ AppSignal is a SaaS platform that allows developers to monitor real-time events 
   - Professionally designed checkout and payment confirmation modals.  
   - Pricing page with lifetime access options and advanced analytics.  
 
----
-
 ## Tech Stack 🛠️
 
 - **Frontend**: Next.js, Tailwind, sshadcn-ui, React Query
@@ -51,8 +47,6 @@ AppSignal is a SaaS platform that allows developers to monitor real-time events 
 - **Authentication**: Clerk for secure user authentication
 - **Payment System**: Stripe for secure payments
 - **UI/UX**: Clean, modern design with custom artworks by a professional illustrator
-
----
 
 ## Getting Started ▶️
 ### Prerequisites
@@ -67,8 +61,8 @@ AppSignal is a SaaS platform that allows developers to monitor real-time events 
 1. Clone this repository:  
 
    ```bash  
-   git clone <repository_url>
-   cd <repository_name>
+   git clone https://github.com/samuel032khoury/AppSignal.git
+   cd AppSignal
    ```
 
 2. Install dependencies:  
@@ -79,9 +73,7 @@ AppSignal is a SaaS platform that allows developers to monitor real-time events 
 
 3. Configure environment variables:  
 
-   - Create a `.env.local` file in the root directory.  
-
-   - Add the following variables:  
+   - Add the following variables to `.env.local`:
 
      ```env  
      NEXT_PUBLIC_DISCORD_WEBHOOK_URL=<your_discord_webhook_url>
@@ -89,7 +81,7 @@ AppSignal is a SaaS platform that allows developers to monitor real-time events 
      CLERK_FRONTEND_API=<your_clerk_frontend_api>
      CLERK_API_KEY=<your_clerk_api_key>
      ```
-
+   
 4. Run the development server:  
 
    ```bash  
@@ -97,8 +89,6 @@ AppSignal is a SaaS platform that allows developers to monitor real-time events 
    ```
 
    The application will be accessible at `http://localhost:3000`.  
-
----
 
 ## AppSignal in Practice 🚀
 
@@ -129,8 +119,6 @@ AppSignal is a SaaS platform that allows developers to monitor real-time events 
 7. **and MORE...**
 
   Start monitoring your SaaS events in real time today with AppSignal!
-
----
 
 ## Acknowledgement 📜
 
