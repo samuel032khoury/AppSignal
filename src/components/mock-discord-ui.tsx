@@ -47,10 +47,10 @@ export const MockDiscordUI = ({ children }: PropsWithChildren) => {
         </div>
       </div>
 
-      {/* DM list */}
-      <div className="hidden md:flex w-60 bg-[#2f3136] flex-col min-w-60">
+      {/* DM List */}
+      <div className="hidden md:flex w-60 bg-[#2f3136] flex-col min-w-40">
         <div className="px-4 h-16 border-b border-[#202225] flex items-center shadow-sm">
-          <div className="w-full bg-[#202225] text-sm rounded px-2 h-8 flex items-center justify-center text-gray-500 cursor-not-allowed">
+          <div className="w-full bg-[#202225] text-sm rounded px-2 h-8 flex items-center justify-center text-gray-500 cursor-not-allowed overflow-hidden text-nowrap">
             Find or start a conversation
           </div>
         </div>
@@ -65,8 +65,10 @@ export const MockDiscordUI = ({ children }: PropsWithChildren) => {
               <span className="font-medium text-sm">Nitro</span>
             </div>
             <div className="flex items-center text-sm px-2 py-1.5 rounded hover:bg-[#393c43] text-[#dcddde] cursor-not-allowed">
-              <Icons.mail className="mr-4 size-8 text-[#b9bbbe]" />
-              <span className="font-medium text-sm">Message Requests</span>
+              <Icons.mail className="mr-4 size-8 shrink-0 text-[#b9bbbe]" />
+              <span className="font-medium text-sm text-nowrap overflow-ellipsis">
+                Message Requests
+              </span>
             </div>
           </div>
 
@@ -75,7 +77,7 @@ export const MockDiscordUI = ({ children }: PropsWithChildren) => {
               Direct Messages
             </h3>
             <div className="flex items-center px-2 py-1.5 rounded bg-[#393c43] text-white cursor-pointer">
-              <div className="rounded-full bg-white mr-3">
+              <div className="rounded-full bg-gray-500/40 mr-3">
                 <Image
                   src="/brand-icon.png"
                   alt="Brand Icon"
@@ -134,7 +136,7 @@ export const MockDiscordUI = ({ children }: PropsWithChildren) => {
           </div>
           <div className="flex items-center">
             <div className="absolute">
-              <div className="rounded-full bg-white mr-3">
+              <div className="rounded-full bg-gray-500/40 mr-3">
                 <Image
                   src={"/brand-icon.png"}
                   alt={"Brand Icon"}

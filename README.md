@@ -1,4 +1,3 @@
-
 # AppSignal - Real-Time SaaS Insights ✨
 
 ## Features 🔮
@@ -6,42 +5,47 @@
 AppSignal is a SaaS platform that allows developers to monitor real-time events in their applications and receive notifications directly in their Discord accounts. This project includes an API for tracking events, a beautiful dashboard for managing and viewing data, and a complete quota tracking and subscription system.
 
 ### Core Functionality
-- **Real-Time Event Notifications** 
+
+- **Real-Time Event Notifications**
   Receive beautifully formatted Discord notifications for events in real time (e.g., sales, new user signups).
-  
-- **Event Tracking API** 
+- **Event Tracking API**
   Flexible API for sending events with customizable data (e.g., category, amount, user ID) from any framework or language.
 
-- **Dashboard for Insights**  
-  - View, manage, and customize events using a clean and intuitive interface.  
-  - Pre-built quick-start options to auto-create event categories (e.g., bugs, sales, questions).  
-  - Sortable and filterable event tables with real-time updates.  
+- **Dashboard for Insights**
+  - View, manage, and customize events using a clean and intuitive interface.
+  - Pre-built quick-start options to auto-create event categories (e.g., bugs, sales, questions).
+  - Sortable and filterable event tables with real-time updates.
 
 ### User Experience
-- **Interactive Landing Page**  
-  - Live demo showcasing the Discord UI for notifications.  
-  - Complex and visually appealing Bento grid design for presenting features.  
 
-- **Advanced Data Handling**  
-  - React Query-powered data fetching for a seamless user experience.  
+- **Interactive Landing Page**
+
+  - Live demo showcasing the Discord UI for notifications.
+  - Complex and visually appealing Bento grid design for presenting features.
+
+- **Advanced Data Handling**
+  - React Query-powered data fetching for a seamless user experience.
   - Beautiful loading states, animations, and functional tables.
 
 ### Subscription and Quotas
-- **Plan Management**  
-  - Free plan with a limited number of events and categories.  
+
+- **Plan Management**
+
+  - Free plan with a limited number of events and categories.
   - Pro plan for expanded event tracking and advanced analytics.
 
-- **Quota Tracking**  
-  - Real-time quota updates in the dashboard.  
+- **Quota Tracking**
+
+  - Real-time quota updates in the dashboard.
   - Automatic notifications to encourage plan upgrades.
 
-- **Checkout and Payment System**  
-  - Professionally designed checkout and payment confirmation modals.  
-  - Pricing page with lifetime access options and advanced analytics.  
+- **Checkout and Payment System**
+  - Professionally designed checkout and payment confirmation modals.
+  - Pricing page with lifetime access options and advanced analytics.
 
 ## Tech Stack 🛠️
 
-- **Frontend**: Next.js, Tailwind, sshadcn-ui, React Query
+- **Frontend**: Next.js, Tailwind, shadcn-ui, React Query
 - **API**: Hono.js
 - **Integration**: Discord for real-time notifications
 - **Authentication**: Clerk for secure user authentication
@@ -49,7 +53,9 @@ AppSignal is a SaaS platform that allows developers to monitor real-time events 
 - **UI/UX**: Clean, modern design with custom artworks by a professional illustrator
 
 ## Getting Started ▶️
+
 ### Prerequisites
+
 - Node.js (v18 or higher)
 - Next.js (v14)
 - Discord account
@@ -58,37 +64,37 @@ AppSignal is a SaaS platform that allows developers to monitor real-time events 
 
 ### Steps
 
-1. Clone this repository:  
+1. Clone this repository:
 
-   ```bash  
+   ```bash
    git clone https://github.com/samuel032khoury/AppSignal.git
    cd AppSignal
    ```
 
-2. Install dependencies:  
+2. Install dependencies:
 
-   ```bash  
-   npm install 
+   ```bash
+   npm install
    ```
 
-3. Configure environment variables:  
+3. Configure environment variables:
 
    - Add the following variables to `.env.local`:
 
-     ```env  
+     ```env
      NEXT_PUBLIC_DISCORD_WEBHOOK_URL=<your_discord_webhook_url>
      STRIPE_API_KEY=<your_stripe_api_key>
      CLERK_FRONTEND_API=<your_clerk_frontend_api>
      CLERK_API_KEY=<your_clerk_api_key>
      ```
-   
-4. Run the development server:  
 
-   ```bash  
+4. Run the development server:
+
+   ```bash
    npm run dev
    ```
 
-   The application will be accessible at `http://localhost:3000`.  
+   The application will be accessible at `http://localhost:3000`.
 
 ## AppSignal in Practice 🚀
 
@@ -103,7 +109,7 @@ AppSignal is a SaaS platform that allows developers to monitor real-time events 
 3. **E-commerce Platforms**:
 
    An e-commerce company uses AppSignal to track new orders for timely processing and receives alerts when stock for products is low to prompt reordering.
-   
+
 4. **Open Source Projects**:
 
    An open-source library team tracks their package downloads on platforms like npm or PyPI and uses AppSignal for updates.
@@ -114,11 +120,11 @@ AppSignal is a SaaS platform that allows developers to monitor real-time events 
 
 6. **Online Forum**:
 
-  An online forum uses AppSignal to monitor new posts and get notifications when a post goes viral.
+An online forum uses AppSignal to monitor new posts and get notifications when a post goes viral.
 
 7. **and MORE...**
 
-  Start monitoring your SaaS events in real time today with AppSignal!
+Start monitoring your SaaS events in real time today with AppSignal!
 
 ## Acknowledgement 📜
 

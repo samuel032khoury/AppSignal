@@ -10,6 +10,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      transitionTimingFunction: {
+        glare: "cubic-bezier(0.19, 1, 0.22, 1)",
+      },
       fontFamily: {
         heading: ["var(--font-heading)", ...fontFamily.sans],
       },
