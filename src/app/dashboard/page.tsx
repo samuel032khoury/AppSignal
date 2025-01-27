@@ -15,7 +15,7 @@ const Page = async () => {
   })
 
   if (!user) {
-    redirect("/sign-in")
+    redirect("/welcome")
   }
 
   return (
