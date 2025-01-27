@@ -10,6 +10,7 @@ const Page = async () => {
   if (!auth) {
     redirect("/sign-in")
   }
+
   const user = await db.user.findUnique({
     where: { externalId: auth.id },
   })

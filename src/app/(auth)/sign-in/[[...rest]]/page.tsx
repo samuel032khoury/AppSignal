@@ -3,7 +3,11 @@ import { SignIn } from "@clerk/nextjs"
 const Page = async () => {
   return (
     <div className="w-full flex-1 flex items-center justify-center">
-      <SignIn fallbackRedirectUrl={"/dashboard"} />
+      <SignIn
+        signUpFallbackRedirectUrl={"/welcome"}
+        fallback={"/dashboard"}
+        forceRedirectUrl={"/dashboard"}
+      />
     </div>
   )
 }
