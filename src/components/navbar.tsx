@@ -16,22 +16,23 @@ const Navbar = async () => {
           </Link>
           <div>
             {user ? (
-              <>
+              <div className="h-full flex items-center space-x-4">
                 <SignOutButton>
                   <Button size="sm" variant={"ghost"}>
                     Sign Out
                   </Button>
                 </SignOutButton>
+
                 <Link
                   href="/dashboard"
                   className={buttonVariants({
                     size: "sm",
-                    className: "flex items-center gap-1",
+                    className: "flex items-center md:gap-2 px-3",
                   })}
                 >
-                  Dashboard <ArrowRight className="ml-1.5 size-4" />
+                  Dashboard <ArrowRight className="size-4" />
                 </Link>
-              </>
+              </div>
             ) : (
               <div className="h-full flex items-center space-x-2 md:space-x-4">
                 <Link
@@ -58,7 +59,7 @@ const Navbar = async () => {
                   className={buttonVariants({
                     size: "sm",
                     className:
-                      "flex items-center min-w-20 gap-[0.3rem] md:gap-1.5",
+                      "flex items-center min-w-20 gap-[0.3rem] md:gap-1.5 px-3",
                   })}
                 >
                   <span>Sign Up</span>
