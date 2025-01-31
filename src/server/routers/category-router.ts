@@ -2,6 +2,9 @@ import { db } from "@/lib/db"
 import { router } from "../__internals/router"
 import { privateProcedure } from "../procedures"
 import { startOfMonth } from "date-fns"
+import { z } from "zod"
+import { EVENT_CATEGORY_VALIDATOR } from "@/lib/validators/category-validator"
+import { parseColor } from "@/lib/utils"
 
 export const categoryRouter = router({
   getEventCategories: privateProcedure.query(async ({ c, ctx }) => {
@@ -73,5 +76,44 @@ export const categoryRouter = router({
     )
 
     return c.superjson({ categories: categoriesWithCounts })
+  }),
+  deleteCategory: privateProcedure
+    .input(z.object({ name: z.string() }))
+    .mutation(async ({ c, input, ctx }) => {
+      const { name } = input
+
+      await db.eventCategory.delete({
+        where: { name_userId: { name, userId: ctx.user.id } },
+      })
+      return c.json({ success: true })
+    }),
+  createCategory: privateProcedure
+    .input(EVENT_CATEGORY_VALIDATOR)
+    .mutation(async ({ c, input, ctx }) => {
+      const { user } = ctx
+      const { color, name, emoji } = input
+
+      // TODO: ADD PREMIUM PLAN LOGIC
+
+      const eventCategory = await db.eventCategory.create({
+        data: {
+          name: name.toLowerCase(),
+          color: parseColor(color),
+          emoji,
+          userId: user.id,
+        },
+      })
+      return c.json({ eventCategory })
+    }),
+  insertQuickstartCategories: privateProcedure.mutation(async ({ ctx, c }) => {
+    const { user } = ctx
+    const categories = await db.eventCategory.createMany({
+      data: [
+        { name: "Bugs", emoji: "🐛", color: 0xff6b6b, userId: user.id },
+        { name: "Sales", emoji: "💰", color: 0xffeb3b, userId: user.id },
+        { name: "Issues", emoji: "🤔", color: 0x6c5ce7, userId: user.id },
+      ],
+    })
+    return c.json({ success: true, count: categories.count })
   }),
 })

@@ -46,7 +46,8 @@ AppSignal is a SaaS platform that allows developers to monitor real-time events 
 ## Tech Stack 🛠️
 
 - **Frontend**: Next.js, Tailwind, shadcn-ui, React Query
-- **API**: Hono.js, tRPC
+- **Backend**: Hono.js, tRPC
+- **Database**: Prisma, Neon
 - **Integration**: Discord for real-time notifications
 - **Authentication**: Clerk for secure user authentication
 - **Payment System**: Stripe for secure payments
@@ -87,7 +88,7 @@ AppSignal is a SaaS platform that allows developers to monitor real-time events 
      CLERK_FRONTEND_API=<your_clerk_frontend_api>
      CLERK_API_KEY=<your_clerk_api_key>
      ```
-     
+
      - Get Clerk API [here](https://clerk.com).
 
 4. Run the development server:
