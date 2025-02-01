@@ -86,7 +86,7 @@ const CategoryEmptyState = ({ categoryName }: { categoryName: string }) => {
           </span>
         </div>
 
-        <p className="text-sm/6 text-gray-600 mt-2">
+        <p className="text-sm/6 text-gray-600 mt-2 text-pretty text-center">
           Need help? Check out our{" "}
           <a
             href="/support/documentation"

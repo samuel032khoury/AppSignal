@@ -1,7 +1,7 @@
 import { FREE_QUOTA, PREMIUM_QUOTA } from "@/config"
 import { db } from "@/lib/db"
 import { DiscordClient } from "@/lib/discord-client"
-import { REQUEST_VALIDATOR } from "@/lib/validators/api-events-validator"
+import { EVENTS_REQUEST_VALIDATOR } from "@/lib/validators/api-events-validator"
 import { NextRequest, NextResponse } from "next/server"
 import { z } from "zod"
 
@@ -90,7 +90,7 @@ export const POST = async (req: NextRequest) => {
       )
     }
 
-    const validationResult = REQUEST_VALIDATOR.parse(requestData)
+    const validationResult = EVENTS_REQUEST_VALIDATOR.parse(requestData)
 
     const category = user.eventCategories.find(
       (category) => category.name === validationResult.category
@@ -143,7 +143,7 @@ export const POST = async (req: NextRequest) => {
         where: { id: event.id },
         data: { deliveryStatus: "DELIVERED" },
       })
-
+      
       await db.quota.upsert({
         where: { userId: user.id, month: currentMonth, year: currentYear },
         update: { count: { increment: 1 } },

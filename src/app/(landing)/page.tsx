@@ -334,10 +334,10 @@ const Page = () => {
                 />
                 <div className="flex flex-col items-center lg:items-start">
                   <p className="font-semibold flex items-center">
-                    Svetka Alexandra
+                    Mandy Brock
                     <Icons.verificationBadge className="size-4 inline-block ml-1.5" />
                   </p>
-                  <p className="text-sm text-gray-600">@itssvetka</p>
+                  <p className="text-sm text-gray-600">@itsmandy</p>
                 </div>
               </div>
             </div>
