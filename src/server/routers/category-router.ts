@@ -3,8 +3,12 @@ import { router } from "../__internals/router"
 import { privateProcedure } from "../procedures"
 import { startOfMonth } from "date-fns"
 import { z } from "zod"
-import { EVENT_CATEGORY_VALIDATOR } from "@/lib/validators/category-validator"
+import {
+  CATEGORY_NAME_VALIDATOR,
+  EVENT_CATEGORY_VALIDATOR,
+} from "@/lib/validators/category-validator"
 import { parseColor } from "@/lib/utils"
+import { HTTPException } from "hono/http-exception"
 
 export const categoryRouter = router({
   getEventCategories: privateProcedure.query(async ({ c, ctx }) => {
@@ -31,7 +35,7 @@ export const categoryRouter = router({
             db.event
               .findMany({
                 where: {
-                  EventCategory: { id: category.id },
+                  eventCategory: { id: category.id },
                   createdAt: { gte: firstDayOfMonth },
                 },
                 select: { fields: true },
@@ -48,14 +52,14 @@ export const categoryRouter = router({
               }),
             db.event.count({
               where: {
-                EventCategory: { id: category.id },
+                eventCategory: { id: category.id },
                 createdAt: { gte: firstDayOfMonth },
               },
             }),
             db.event
               .findFirst({
                 where: {
-                  EventCategory: { id: category.id },
+                  eventCategory: { id: category.id },
                 },
                 orderBy: {
                   createdAt: "desc",
@@ -109,11 +113,36 @@ export const categoryRouter = router({
     const { user } = ctx
     const categories = await db.eventCategory.createMany({
       data: [
-        { name: "Bugs", emoji: "🐛", color: 0xff6b6b, userId: user.id },
-        { name: "Sales", emoji: "💰", color: 0xffeb3b, userId: user.id },
-        { name: "Issues", emoji: "🤔", color: 0x6c5ce7, userId: user.id },
+        { name: "Bug", emoji: "🐛", color: 0xff6b6b, userId: user.id },
+        { name: "Sale", emoji: "💰", color: 0xffeb3b, userId: user.id },
+        { name: "Feedback", emoji: "📄", color: 0x6c5ce7, userId: user.id },
       ],
     })
     return c.json({ success: true, count: categories.count })
   }),
+  pollCategory: privateProcedure
+    .input(z.object({ name: CATEGORY_NAME_VALIDATOR }))
+    .query(async ({ c, ctx, input }) => {
+      const { name } = input
+      const category = await db.eventCategory.findUnique({
+        where: {
+          name_userId: {
+            name,
+            userId: ctx.user.id,
+          },
+        },
+        include: {
+          _count: {
+            select: { events: true },
+          },
+        },
+      })
+      if (!category) {
+        throw new HTTPException(404, {
+          message: `Category "${name} not found.`,
+        })
+      }
+      const hasEvents = category._count.events > 0
+      return c.json({ hasEvents })
+    }),
 })
