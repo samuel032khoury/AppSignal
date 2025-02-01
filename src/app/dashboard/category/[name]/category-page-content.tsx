@@ -35,10 +35,6 @@ const CategoryPageContent = ({
     initialData: { hasEvents: initialHasEvents },
   })
 
-  if (!pollingData.hasEvents) {
-    return <CategoryEmptyState categoryName={category.name} />
-  }
-
   const { data, isFetching } = useQuery({
     queryKey: [
       "events",
@@ -60,6 +56,10 @@ const CategoryPageContent = ({
     refetchOnWindowFocus: false,
     enabled: pollingData.hasEvents,
   })
+
+  if (!pollingData.hasEvents) {
+    return <CategoryEmptyState categoryName={category.name} />
+  }
 
   return (
     <div className="space-y-6">
