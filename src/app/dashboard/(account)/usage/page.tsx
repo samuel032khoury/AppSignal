@@ -1,6 +1,6 @@
 import { currentUser } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
-import UpgradePageContent from "./upgrade-page-content"
+import UsageSummary from "./usage-summary"
 import { db } from "@/lib/db"
 import { Dashboard } from "@/components/dashboard"
 
@@ -20,8 +20,8 @@ const Page = async () => {
   }
 
   return (
-    <Dashboard title="Premium Plan">
-      <UpgradePageContent plan={user.plan} />
+    <Dashboard title="Account Usage">
+      <UsageSummary plan={user.plan} />
     </Dashboard>
   )
 }

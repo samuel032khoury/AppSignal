@@ -32,12 +32,16 @@ const Page = async ({ searchParams }: PageProps) => {
   }
 
   if (intent === "upgrade") {
-    const session = await createCheckoutSession({
-      userEmail: user.email,
-      userId: user.id,
-    })
+    if (user.plan === "FREE") {
+      const session = await createCheckoutSession({
+        userEmail: user.email,
+        userId: user.id,
+      })
 
-    if (session.url) redirect(session.url)
+      if (session.url) redirect(session.url)
+    } else {
+      // TODO: PURCHASE RESTORE, THANK YOU MODAL
+    }
   }
 
   const paymentSuccess = searchParams.success

@@ -8,7 +8,7 @@ import { format } from "date-fns"
 import { BarChart } from "lucide-react"
 import { useRouter } from "next/navigation"
 
-const UpgradePageContent = ({ plan }: { plan: Plan }) => {
+const UsageSummary = ({ plan }: { plan: Plan }) => {
   const router = useRouter()
   const { mutate: createCheckoutSession } = useMutation({
     mutationFn: async () => {
@@ -113,4 +113,4 @@ const UpgradePageContent = ({ plan }: { plan: Plan }) => {
   )
 }
 
-export default UpgradePageContent
+export default UsageSummary

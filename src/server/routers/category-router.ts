@@ -90,6 +90,7 @@ export const categoryRouter = router({
       await db.eventCategory.delete({
         where: { name_userId: { name, userId: ctx.user.id } },
       })
+
       return c.json({ success: true })
     }),
   createCategory: privateProcedure

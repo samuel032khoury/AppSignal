@@ -25,7 +25,6 @@ const Page = () => {
 
   const searchParams = useSearchParams()
   const intent = searchParams.get("intent")
-  console.log("HERE", intent)
 
   useEffect(() => {
     if (data?.isSynced)
