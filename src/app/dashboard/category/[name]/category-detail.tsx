@@ -2,7 +2,7 @@
 
 import { EventCategory, Event } from "@prisma/client"
 import { useQuery } from "@tanstack/react-query"
-import CategoryEmptyState from "./category-empty-state"
+import CategoryDetailEmptyState from "./category-detail-empty-state"
 import { useMemo, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import { client } from "@/lib/client"
@@ -34,15 +34,15 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-interface CategoryPageContentProps {
+interface CategoryDetailProps {
   hasEvents: boolean
   category: EventCategory
 }
 
-const CategoryPageContent = ({
+const CategoryDetail = ({
   hasEvents: initialHasEvents,
   category,
-}: CategoryPageContentProps) => {
+}: CategoryDetailProps) => {
   const searchParams = useSearchParams()
   const page = parseInt(searchParams.get("page") || "1", 10)
   const limit = parseInt(searchParams.get("limit") || "30", 10)
@@ -82,7 +82,7 @@ const CategoryPageContent = ({
   })
 
   if (!pollingData.hasEvents) {
-    return <CategoryEmptyState categoryName={category.name} />
+    return <CategoryDetailEmptyState categoryName={category.name} />
   }
 
   const columns: ColumnDef<Event>[] = useMemo(
@@ -361,4 +361,4 @@ const CategoryPageContent = ({
   )
 }
 
-export default CategoryPageContent
+export default CategoryDetail

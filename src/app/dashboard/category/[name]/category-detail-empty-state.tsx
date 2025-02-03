@@ -8,7 +8,11 @@ import { useEffect } from "react"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism"
 
-const CategoryEmptyState = ({ categoryName }: { categoryName: string }) => {
+const CategoryDetailEmptyState = ({
+  categoryName,
+}: {
+  categoryName: string
+}) => {
   const router = useRouter()
   const { data } = useQuery({
     queryKey: ["category", categoryName, "hasEvents"],
@@ -109,4 +113,4 @@ const CategoryEmptyState = ({ categoryName }: { categoryName: string }) => {
   )
 }
 
-export default CategoryEmptyState
+export default CategoryDetailEmptyState
