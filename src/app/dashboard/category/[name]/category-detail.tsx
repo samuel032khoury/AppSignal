@@ -179,12 +179,20 @@ const CategoryDetail = ({
       {
         accessorKey: "createdAt",
         header: ({ column }) => (
-          <Button
-            variant={"ghost"}
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Date <ArrowUpDown className="ml-4 size-4" />
-          </Button>
+          <div className="flex flex-row items-center justify-between w-36">
+            Date
+            <Button
+              variant={"ghost"}
+              onClick={() =>
+                column.toggleSorting(column.getIsSorted() === "asc")
+              }
+              className={cn("px-2 py-3", {
+                hidden: table.getRowModel().rows.length === 0,
+              })}
+            >
+              <ArrowUpDown className="size-4" />
+            </Button>
+          </div>
         ),
         cell: ({ row }) => {
           return new Date(row.getValue("createdAt")).toLocaleString()
@@ -194,7 +202,7 @@ const CategoryDetail = ({
         ? Object.keys(data.events[0].fields as object).map((field) => ({
             accessorFn: (row: Event) =>
               (row.fields as Record<string, any>)[field],
-            header: field,
+            header: field.charAt(0).toUpperCase() + field.slice(1),
             cell: ({ row }: { row: Row<Event> }) =>
               (row.original.fields as Record<string, any>)[field] || "-",
           }))
