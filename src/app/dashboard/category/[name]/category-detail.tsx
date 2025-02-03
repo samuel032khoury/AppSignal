@@ -47,17 +47,23 @@ const CategoryDetail = ({
   const page = parseInt(searchParams.get("page") || "1", 10)
   const limit = parseInt(searchParams.get("limit") || "30", 10)
 
-  const [pagination, setPagination] = useState({
-    pageIndex: page - 1,
-    pageSize: limit,
-  })
-  const [activeTab, setActiveTab] = useState<"today" | "week" | "month">(
-    "today"
-  )
   const { data: pollingData } = useQuery({
     queryKey: ["category", category.name, "hasEvents"],
     initialData: { hasEvents: initialHasEvents },
   })
+
+  const [pagination, setPagination] = useState({
+    pageIndex: page - 1,
+    pageSize: limit,
+  })
+
+  const [activeTab, setActiveTab] = useState<"today" | "week" | "month">(
+    "today"
+  )
+
+  const [sorting, setSorting] = useState<SortingState>([])
+
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 
   const { data, isFetching } = useQuery({
     queryKey: [
@@ -79,84 +85,6 @@ const CategoryDetail = ({
     },
     refetchOnWindowFocus: false,
     enabled: pollingData.hasEvents,
-  })
-
-  if (!pollingData.hasEvents) {
-    return <CategoryDetailEmptyState categoryName={category.name} />
-  }
-
-  const columns: ColumnDef<Event>[] = useMemo(
-    () => [
-      {
-        accessorKey: "category",
-        header: "Category",
-        cell: () => <span>{category.name || "Unknown Category"}</span>,
-      },
-      {
-        accessorKey: "createdAt",
-        header: ({ column }) => (
-          <Button
-            variant={"ghost"}
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Date <ArrowUpDown className="ml-4 size-4" />
-          </Button>
-        ),
-        cell: ({ row }) => {
-          return new Date(row.getValue("createdAt")).toLocaleString()
-        },
-      },
-      ...(data?.events[0]
-        ? Object.keys(data.events[0].fields as object).map((field) => ({
-            accessorFn: (row: Event) =>
-              (row.fields as Record<string, any>)[field],
-            header: field,
-            cell: ({ row }: { row: Row<Event> }) =>
-              (row.original.fields as Record<string, any>)[field] || "-",
-          }))
-        : []),
-      {
-        accessorKey: "deliveryStatus",
-        header: "Deliver Status",
-        cell: ({ row }) => (
-          <span
-            className={cn("px-2 py-1 rounded-full text-xs font-semibold", {
-              "bg-green-100 text-green-800":
-                row.getValue("deliveryStatus") === "DELIVERED",
-              "bg-red-100 text-red-800":
-                row.getValue("deliveryStatus") === "FAILED",
-              "bg-yellow-100 text-yellow-800":
-                row.getValue("deliveryStatus") === "PENDING",
-            })}
-          >
-            {row.getValue("deliveryStatus")}
-          </span>
-        ),
-      },
-    ],
-    [category.name, data?.events]
-  )
-
-  const [sorting, setSorting] = useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
-
-  const table = useReactTable({
-    data: data?.events || [],
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    onSortingChange: setSorting,
-    getSortedRowModel: getSortedRowModel(),
-    onColumnFiltersChange: setColumnFilters,
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    manualPagination: true,
-    pageCount: Math.ceil((data?.eventsCount || 0) / pagination.pageSize),
-    onPaginationChange: setPagination,
-    state: {
-      sorting,
-      columnFilters,
-      pagination,
-    },
   })
 
   const numericFieldsSums = useMemo(() => {
@@ -238,6 +166,82 @@ const CategoryDetail = ({
         </Card>
       )
     })
+  }
+
+  // Table Config
+  const columns: ColumnDef<Event>[] = useMemo(
+    () => [
+      {
+        accessorKey: "category",
+        header: "Category",
+        cell: () => <span>{category.name || "Unknown Category"}</span>,
+      },
+      {
+        accessorKey: "createdAt",
+        header: ({ column }) => (
+          <Button
+            variant={"ghost"}
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Date <ArrowUpDown className="ml-4 size-4" />
+          </Button>
+        ),
+        cell: ({ row }) => {
+          return new Date(row.getValue("createdAt")).toLocaleString()
+        },
+      },
+      ...(data?.events[0]
+        ? Object.keys(data.events[0].fields as object).map((field) => ({
+            accessorFn: (row: Event) =>
+              (row.fields as Record<string, any>)[field],
+            header: field,
+            cell: ({ row }: { row: Row<Event> }) =>
+              (row.original.fields as Record<string, any>)[field] || "-",
+          }))
+        : []),
+      {
+        accessorKey: "deliveryStatus",
+        header: "Deliver Status",
+        cell: ({ row }) => (
+          <span
+            className={cn("px-2 py-1 rounded-full text-xs font-semibold", {
+              "bg-green-100 text-green-800":
+                row.getValue("deliveryStatus") === "DELIVERED",
+              "bg-red-100 text-red-800":
+                row.getValue("deliveryStatus") === "FAILED",
+              "bg-yellow-100 text-yellow-800":
+                row.getValue("deliveryStatus") === "PENDING",
+            })}
+          >
+            {row.getValue("deliveryStatus")}
+          </span>
+        ),
+      },
+    ],
+    [category.name, data?.events]
+  )
+
+  const table = useReactTable({
+    data: data?.events || [],
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    manualPagination: true,
+    pageCount: Math.ceil((data?.eventsCount || 0) / pagination.pageSize),
+    onPaginationChange: setPagination,
+    state: {
+      sorting,
+      columnFilters,
+      pagination,
+    },
+  })
+
+  if (!pollingData.hasEvents) {
+    return <CategoryDetailEmptyState categoryName={category.name} />
   }
 
   return (
