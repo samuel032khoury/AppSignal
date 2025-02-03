@@ -4,6 +4,6 @@ export const FREE_QUOTA = {
 } as const
 
 export const PREMIUM_QUOTA = {
-  maxEventsPerMonth: 1000,
+  maxEventsPerMonth: 10000,
   maxEventCategories: 10,
 } as const

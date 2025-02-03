@@ -7,7 +7,7 @@ import LoadingSpinner from "@/components/loading-spinner"
 import { client } from "@/lib/client"
 import { useQuery } from "@tanstack/react-query"
 import { LucideProps } from "lucide-react"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useEffect } from "react"
 
 const Page = () => {
@@ -23,9 +23,14 @@ const Page = () => {
     },
   })
 
+  const searchParams = useSearchParams()
+  const intent = searchParams.get("intent")
+  console.log("HERE", intent)
+
   useEffect(() => {
-    if (data?.isSynced) router.push("/dashboard")
-  }, [data, router])
+    if (data?.isSynced)
+      router.push(intent ? `/dashboard?intent=${intent}` : "/dashboard")
+  }, [data, router, intent])
 
   return (
     <div className="flex w-full flex-1 items-center justify-center px-4">

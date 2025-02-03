@@ -3,6 +3,7 @@ import { router } from "../__internals/router"
 import { FREE_QUOTA, PREMIUM_QUOTA } from "@/config"
 import { db } from "@/lib/db"
 import { privateProcedure } from "../procedures"
+import { z } from "zod"
 
 export const projectRouter = router({
   getUsage: privateProcedure.query(async ({ c, ctx }) => {
@@ -36,4 +37,15 @@ export const projectRouter = router({
       resetDate,
     })
   }),
+  setDiscordID: privateProcedure
+    .input(z.object({ discordId: z.string().max(20) }))
+    .mutation(async ({ c, input, ctx }) => {
+      const { user } = ctx
+      const { discordId } = input
+      await db.user.update({
+        where: { id: user.id },
+        data: { discordId },
+      })
+      return c.json({ success: true })
+    }),
 })

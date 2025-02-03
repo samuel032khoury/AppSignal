@@ -98,7 +98,7 @@ export const categoryRouter = router({
       const { user } = ctx
       const { color, name, emoji } = input
 
-      // TODO: ADD PREMIUM PLAN LOGIC
+      // TODO: ADD QUOTA RESTRICTION LOGIC
 
       const eventCategory = await db.eventCategory.create({
         data: {
@@ -203,7 +203,7 @@ export const categoryRouter = router({
       return c.superjson({
         events,
         eventsCount,
-        uniqueFieldCount
+        uniqueFieldCount,
       })
     }),
 })
