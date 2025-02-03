@@ -7,7 +7,7 @@ import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism"
 export default function DocumentationPage() {
   const [copied, setCopied] = useState(false)
 
-  const codeSnippet = `await fetch('https://app-signal.vercel.app/api/events', {
+  const codeSnippet = `await fetch('${process.env.NEXT_PUBLIC_APP_URL}/api/v1/events', {
   method: 'POST',
   headers: {
     'Authorization': 'Bearer YOUR_API_KEY',

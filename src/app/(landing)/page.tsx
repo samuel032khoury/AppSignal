@@ -11,10 +11,10 @@ import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism"
 import { Icons } from "@/components/icons"
 
 const Page = () => {
-  const codeSnippet = `await fetch("https://app-signal.vercel.app/api/v1/events", {
+  const codeSnippet = `await fetch("${process.env.NEXT_PUBLIC_APP_URL}/api/v1/events", {
   method: "POST",
   body: JSON.stringify({
-    category: "sale",
+    category: "Sale",
     fields: {
       plan: "Premium",
       email: "tommytrojan@usc.edu",

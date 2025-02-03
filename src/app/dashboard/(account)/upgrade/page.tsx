@@ -20,7 +20,7 @@ const Page = async () => {
   }
 
   return (
-    <Dashboard title="Pro Membership">
+    <Dashboard title="Premium Plan">
       <UpgradePageContent plan={user.plan} />
     </Dashboard>
   )
