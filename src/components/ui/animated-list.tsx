@@ -26,10 +26,17 @@ export function AnimatedListItem({ children }: { children: React.ReactNode }) {
 export interface AnimatedListProps extends ComponentPropsWithoutRef<"div"> {
   children: React.ReactNode
   delay?: number
+  resetTime?: number
 }
 
 export const AnimatedList = React.memo(
-  ({ children, className, delay = 1000, ...props }: AnimatedListProps) => {
+  ({
+    children,
+    className,
+    delay = 1000,
+    resetTime = 3000,
+    ...props
+  }: AnimatedListProps) => {
     const [index, setIndex] = useState(0)
     const childrenArray = useMemo(
       () => React.Children.toArray(children),
@@ -43,6 +50,12 @@ export const AnimatedList = React.memo(
         }, delay)
 
         return () => clearTimeout(timeout)
+      } else {
+        const resetTimeout = setTimeout(() => {
+          setIndex(-1)
+        }, resetTime)
+
+        return () => clearTimeout(resetTimeout)
       }
     }, [index, delay, childrenArray.length])
 
