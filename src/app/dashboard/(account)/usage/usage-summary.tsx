@@ -35,15 +35,25 @@ const UsageSummary = ({ plan }: { plan: Plan }) => {
           {plan === "PREMIUM" ? "Plan: Premium" : "Plan: Free"}
         </h1>
         <p className="text-sm/6 text-gray-600 max-w-prose">
-          {plan === "PREMIUM"
-            ? "Thank you for supporting AppSignal. Find your increased usage limits below."
-            : "Get access to more events, categories and premium support."}
+          {plan === "PREMIUM" ? (
+            "Thank you for supporting AppSignal. Find your increased usage limits below."
+          ) : (
+            <>
+              Get access to more events, categories and premium support with a{" "}
+              <span
+                onClick={() => createCheckoutSession()}
+                className="inline cursor-pointer text-brand-600"
+              >
+                premium plan.
+              </span>
+            </>
+          )}
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Card className="border-2 border-brand-700">
           <div className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <p className="text-sm/6 font-medium">Total Events</p>
+            <p className="text-sm/6 font-medium">Total Events Posted</p>
             <BarChart className="size-4 text-muted-foreground" />
           </div>
 
@@ -63,13 +73,13 @@ const UsageSummary = ({ plan }: { plan: Plan }) => {
               )}
             </p>
             <p className="text-xs/5 text-muted-foreground">
-              Events this period
+              Events posted in this period
             </p>
           </div>
         </Card>
         <Card>
           <div className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <p className="text-sm/6 font-medium">Event Categories</p>
+            <p className="text-sm/6 font-medium">Active Event Categories</p>
             <BarChart className="size-4 text-muted-foreground" />
           </div>
 
@@ -88,7 +98,9 @@ const UsageSummary = ({ plan }: { plan: Plan }) => {
                 </>
               )}
             </p>
-            <p className="text-xs/5 text-muted-foreground">Active categories</p>
+            <p className="text-xs/5 text-muted-foreground">
+              Active categories created
+            </p>
           </div>
         </Card>
       </div>
